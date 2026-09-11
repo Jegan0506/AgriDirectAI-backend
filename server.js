@@ -1822,26 +1822,16 @@ app.get(
    START SERVER
 ========================================================= */
 
-const PORT = 5001;
+const PORT = process.env.PORT || 5001;
 
 mongoose
-  .connect(
-    process.env.MONGO_URI
-  )
+  .connect(process.env.MONGO_URI)
   .then(() => {
-    console.log(
-      "✅ MongoDB connected"
-    );
+    console.log("✅ MongoDB connected");
 
-    app.listen(
-      PORT,
-      "127.0.0.1",
-      () => {
-        console.log(
-          `🚀 Server running at http://127.0.0.1:${PORT}`
-        );
-      }
-    );
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log(`🚀 Server running on port ${PORT}`);
+    });
   })
   .catch((error) => {
     console.log(
